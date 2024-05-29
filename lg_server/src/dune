@@ -1,5 +1,7 @@
 (executable
-(name main)
-(libraries dream)
-(preprocess (pps lwt_ppx ppx_yojson_conv))
-(public_name main))
+ (name main)
+ (libraries dream)
+ (modules main)
+ (preprocess (pps lwt_ppx ppx_yojson_conv))
+ (public_name main)
+)
