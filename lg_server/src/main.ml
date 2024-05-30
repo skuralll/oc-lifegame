@@ -10,8 +10,22 @@ type board_state = {
 
 type _ Effect.t += GetNext : board_state -> board_state Effect.t
 
-let base_rule f = 
+let inner_run f () =
   match_with f () {
+    retc = (fun x -> x);
+    exnc = (fun e -> raise e);
+    effc = (fun  (type b) (eff: b t)-> 
+      match eff with
+        | GetNext (board) -> 
+          (Some (fun (k: (b,_) continuation) -> 
+            continue k board
+          ))
+        | _ -> None
+    )
+  } 
+
+let cellgame_run f = 
+  match_with (inner_run f) () {
     retc = (fun x -> x);
     exnc = (fun e -> raise e);
     effc = (fun  (type b) (eff: b t)-> 
@@ -52,4 +66,4 @@ let main () =
 
   ]
 
-let _ = base_rule main
+let _ = cellgame_run main
