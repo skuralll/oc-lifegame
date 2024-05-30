@@ -105,7 +105,7 @@ let main () =
           |> Yojson.Safe.from_string
           |> board_state_of_yojson
         in
-        let next_board_state = perform(GetNext board_state) in (* TODO:次の盤面を計算する *)
+        let next_board_state = perform(GetNext board_state) in
         
         Dream.json (Yojson.Safe.to_string (yojson_of_board_state next_board_state)));
 
