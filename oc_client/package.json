@@ -14,9 +14,11 @@
   "dependencies": {
     "@takuma-ru/auto-story-generator": "^0.3.3",
     "eslint-config-prettier": "^9.1.0",
+    "konva": "^9.3.11",
     "prettier": "^3.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-konva": "^18.2.10"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
