@@ -1,5 +1,11 @@
+import { Board } from './components/Board';
+
 function App() {
-  return <>This is test</>;
+  return (
+    <>
+      <Board />
+    </>
+  );
 }
 
 export default App;
