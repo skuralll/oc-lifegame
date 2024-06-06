@@ -16,6 +16,8 @@ export const Board = ({ cellSize }: BoardProps) => {
           row.map((alive, x) => (
             <Cell
               key={`${x}-${y}`}
+              col={x}
+              row={y}
               x={x * cellSize}
               y={y * cellSize}
               cellSize={cellSize}
