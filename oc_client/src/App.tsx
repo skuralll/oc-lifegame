@@ -1,9 +1,9 @@
-import { Board } from './components/Board';
+import { LifeGame } from './components/LifeGame';
 
 function App() {
   return (
     <>
-      <Board />
+      <LifeGame />
     </>
   );
 }

@@ -11,7 +11,7 @@ export type BoardContextType = {
   toggleCellState: (x: number, y: number) => void;
 };
 
-export const BoardContext = createContext<BoardContextType | null>(null);
+export const BoardContext = createContext<BoardContextType>({} as BoardContextType);
 
 export const BoardProvider = ({ children }: BoardProviderProps) => {
   const [boardState, setBoardState] = useState<BoardState>({

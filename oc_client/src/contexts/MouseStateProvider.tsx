@@ -11,19 +11,19 @@ export type MouseContextType = {
   setMouseDown: (isMouseDown: boolean) => void;
 };
 
-export const MouseContext = createContext<MouseContextType | null>(null);
+export const MouseContext = createContext<MouseContextType>({} as MouseContextType);
 
 export const MouseStateProvider = ({ children }: MouseStateProviderProps) => {
   const [mouseState, setMouseState] = useState<MouseState>({
     isMouseDown: false,
   });
 
-  const setIsMouseDown = (isMouseDown: boolean) => {
+  const setMouseDown = (isMouseDown: boolean) => {
     setMouseState({ ...mouseState, isMouseDown });
   };
 
   return (
-    <MouseContext.Provider value={{ mouseState, setMouseState, setMouseDown: setIsMouseDown }}>
+    <MouseContext.Provider value={{ mouseState, setMouseState, setMouseDown: setMouseDown }}>
       {children}
     </MouseContext.Provider>
   );
