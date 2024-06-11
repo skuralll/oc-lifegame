@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Rect } from 'react-konva';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
+import { MouseContext, MouseContextType } from '../contexts/MouseStateProvider';
 
 type CellProps = {
   col: number;
@@ -13,8 +14,14 @@ type CellProps = {
 
 export const Cell = ({ col, row, x, y, cellSize, alive }: CellProps) => {
   const { toggleCellState } = useContext(BoardContext) as BoardContextType;
+  const { mouseState } = useContext(MouseContext) as MouseContextType;
 
   const handleClick = () => {
+    toggleCellState(col, row);
+  };
+
+  const handleMouseEnter = () => {
+    if (!mouseState.isMouseDown) return;
     toggleCellState(col, row);
   };
 
@@ -28,6 +35,7 @@ export const Cell = ({ col, row, x, y, cellSize, alive }: CellProps) => {
       width={cellSize}
       height={cellSize}
       onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
     />
   );
 };

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Board } from "./Board";
 import { BoardProvider } from "../contexts/BoardProvider";
+import { MouseStateProvider } from "../contexts/MouseStateProvider";
 
 const meta: Meta<typeof Board> = {
   title: "components/Board",
@@ -12,7 +13,9 @@ const meta: Meta<typeof Board> = {
   decorators: [
     (Story) => (
       <BoardProvider>
-        <Story />
+        <MouseStateProvider>
+          <Story />
+        </MouseStateProvider>
       </BoardProvider>
     ),
   ],
