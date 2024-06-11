@@ -1,22 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { LifeGame } from './LifeGame';
-import { BoardProvider } from '../contexts/BoardProvider';
-import { MouseStateProvider } from '../contexts/MouseStateProvider';
+import { LifeGame } from "./LifeGame";
+import { BoardProvider } from "../contexts/BoardProvider";
+import { MouseStateProvider } from "../contexts/MouseStateProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const meta: Meta<typeof LifeGame> = {
-  title: 'components/LifeGame',
+  title: "components/LifeGame",
   component: LifeGame,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {},
   argTypes: {},
   decorators: [
     (Story) => (
-      <BoardProvider>
-        <MouseStateProvider>
-          <Story />
-        </MouseStateProvider>
-      </BoardProvider>
+      <ChakraProvider>
+        <BoardProvider>
+          <MouseStateProvider>
+            <Story />
+          </MouseStateProvider>
+        </BoardProvider>
+      </ChakraProvider>
     ),
   ],
 };

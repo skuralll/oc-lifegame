@@ -9,6 +9,7 @@ export type BoardContextType = {
   boardState: BoardState;
   setBoardState: (boardState: BoardState) => void;
   toggleCellState: (x: number, y: number) => void;
+  resetCellState: () => void;
 };
 
 export const BoardContext = createContext<BoardContextType>({} as BoardContextType);
@@ -36,8 +37,14 @@ export const BoardProvider = ({ children }: BoardProviderProps) => {
     setBoardState(newState);
   };
 
+  const resetCellState = () => {
+    const newState = { ...boardState };
+    newState.board = newState.board.map((row) => row.map(() => 0));
+    setBoardState(newState);
+  };
+
   return (
-    <BoardContext.Provider value={{ boardState, setBoardState, toggleCellState }}>
+    <BoardContext.Provider value={{ boardState, setBoardState, toggleCellState, resetCellState }}>
       {children}
     </BoardContext.Provider>
   );

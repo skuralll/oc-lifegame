@@ -1,9 +1,9 @@
-import { LifeGame } from './components/LifeGame';
+import { LifeGameWrapper } from './components/LifeGameWrapper';
 
 function App() {
   return (
     <>
-      <LifeGame />
+      <LifeGameWrapper />
     </>
   );
 }
