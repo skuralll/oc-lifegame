@@ -83,8 +83,24 @@ let cellgame_run f =
     )
   }
 
+let cors_middleware handler req =
+  let handlers =
+    [ "Allow", "OPTIONS, GET, HEAD, POST"
+    ; "Access-Control-Allow-Origin", "*"
+    ; "Access-Control-Allow-Methods", "OPTIONS, GET, HEAD, POST"
+    ; "Access-Control-Allow-Headers", "Content-Type"
+    ; "Access-Control-Max-Age", "86400"
+    ]
+  in
+  let%lwt res = handler req in
+  handlers
+  |> List.map (fun (key, value) -> Dream.add_header res key value)
+  |> ignore;
+  Lwt.return res
+
 let main () =
   Dream.run
+  @@ cors_middleware
   @@ Dream.logger
   @@ Dream.router [
 
@@ -109,6 +125,9 @@ let main () =
         
         Dream.json (Yojson.Safe.to_string (yojson_of_board_state next_board_state)));
 
+    Dream.options "/step" (fun _req ->
+      Dream.respond ~headers:[ ("Allow", "OPTIONS, GET, HEAD, POST") ] ""); 
+        
   ]
 
 let _ = cellgame_run main
