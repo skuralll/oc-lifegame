@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { LifeGame } from "./LifeGame";
+import { BoardProvider } from "../contexts/BoardProvider";
+import { MouseStateProvider } from "../contexts/MouseStateProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const meta: Meta<typeof LifeGame> = {
   title: "components/LifeGame",
@@ -8,6 +11,17 @@ const meta: Meta<typeof LifeGame> = {
   tags: ["autodocs"],
   args: {},
   argTypes: {},
+  decorators: [
+    (Story) => (
+      <ChakraProvider>
+        <BoardProvider>
+          <MouseStateProvider>
+            <Story />
+          </MouseStateProvider>
+        </BoardProvider>
+      </ChakraProvider>
+    ),
+  ],
 };
 
 export default meta;
