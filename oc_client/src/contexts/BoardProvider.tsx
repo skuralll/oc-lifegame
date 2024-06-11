@@ -15,14 +15,18 @@ export const BoardContext = createContext<BoardContextType | null>(null);
 
 export const BoardProvider = ({ children }: BoardProviderProps) => {
   const [boardState, setBoardState] = useState<BoardState>({
-    width: 5,
-    height: 5,
+    width: 9,
+    height: 9,
     board: [
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 1, 1, 1, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
   });
 
