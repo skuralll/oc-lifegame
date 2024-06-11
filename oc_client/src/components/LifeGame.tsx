@@ -4,16 +4,21 @@ import { useContext } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 
 export const LifeGame = () => {
-  const { resetCellState } = useContext(BoardContext) as BoardContextType;
+  const { resetCellState, advanceBoard } = useContext(BoardContext) as BoardContextType;
 
   const handleReset = () => {
     resetCellState();
+  };
+
+  const handleAdvance = () => {
+    advanceBoard();
   };
 
   return (
     <>
       <Board cellSize={50} />
       <Button onClick={handleReset}>リセット</Button>
+      <Button onClick={handleAdvance}>進める</Button>
     </>
   );
 };
