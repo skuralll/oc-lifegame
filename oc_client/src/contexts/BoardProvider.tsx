@@ -11,7 +11,7 @@ export type BoardContextType = {
   setBoardState: (boardState: BoardState) => void;
   toggleCellState: (x: number, y: number) => void;
   resetCellState: () => void;
-  advanceBoard: () => void;
+  advanceBoard: () => Promise<void>;
 };
 
 export const BoardContext = createContext<BoardContextType>({} as BoardContextType);

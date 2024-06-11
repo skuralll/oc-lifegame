@@ -10,8 +10,8 @@ export const LifeGame = () => {
     resetCellState();
   };
 
-  const handleAdvance = () => {
-    advanceBoard();
+  const handleAdvance = async () => {
+    await advanceBoard();
   };
 
   return (
