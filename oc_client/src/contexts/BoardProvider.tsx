@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 import { BoardState } from '../types/BoardState';
 import { getAdvancedBoard } from '../lib/api-connector';
+import { createNumMatrix } from '../lib/math';
 
 type BoardProviderProps = {
   children: React.ReactNode;
@@ -12,25 +13,16 @@ export type BoardContextType = {
   toggleCellState: (x: number, y: number) => void;
   resetCellState: () => void;
   advanceBoard: () => Promise<void>;
+  randomizeBoard: () => void;
 };
 
 export const BoardContext = createContext<BoardContextType>({} as BoardContextType);
 
 export const BoardProvider = ({ children }: BoardProviderProps) => {
   const [boardState, setBoardState] = useState<BoardState>({
-    width: 9,
-    height: 9,
-    board: [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 1, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ],
+    width: 50,
+    height: 50,
+    board: createNumMatrix(50, 50, 0),
   });
 
   const toggleCellState = (x: number, y: number) => {
@@ -49,9 +41,22 @@ export const BoardProvider = ({ children }: BoardProviderProps) => {
     setBoardState(await getAdvancedBoard(boardState));
   };
 
+  const randomizeBoard = () => {
+    const newState = { ...boardState };
+    newState.board = newState.board.map((row) => row.map(() => (Math.random() > 0.5 ? 1 : 0)));
+    setBoardState(newState);
+  };
+
   return (
     <BoardContext.Provider
-      value={{ boardState, setBoardState, toggleCellState, resetCellState, advanceBoard }}
+      value={{
+        boardState,
+        setBoardState,
+        toggleCellState,
+        resetCellState,
+        advanceBoard,
+        randomizeBoard,
+      }}
     >
       {children}
     </BoardContext.Provider>

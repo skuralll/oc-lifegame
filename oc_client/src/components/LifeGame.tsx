@@ -5,7 +5,9 @@ import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
 
 export const LifeGame = () => {
-  const { resetCellState, advanceBoard } = useContext(BoardContext) as BoardContextType;
+  const { resetCellState, advanceBoard, randomizeBoard } = useContext(
+    BoardContext
+  ) as BoardContextType;
   const [isAuto, setIsAuto] = useState(false);
 
   const handleReset = () => {
@@ -31,10 +33,11 @@ export const LifeGame = () => {
 
   return (
     <>
-      <Board cellSize={50} />
+      <Board cellSize={15} />
       <Button onClick={handleReset}>リセット</Button>
       <Button onClick={handleAdvance}>進める</Button>
       <Button onClick={toggleAutoAdvance}>自動で進める</Button>
+      <Button onClick={randomizeBoard}>ランダム</Button>
     </>
   );
 };
