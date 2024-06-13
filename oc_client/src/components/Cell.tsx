@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Rect } from 'react-konva';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
-import { MouseContext, MouseContextType } from '../contexts/MouseStateProvider';
+import { KonvaEventObject } from 'konva/lib/Node';
 
 type CellProps = {
   col: number;
@@ -14,14 +14,13 @@ type CellProps = {
 
 export const Cell = ({ col, row, x, y, cellSize, alive }: CellProps) => {
   const { toggleCellState } = useContext(BoardContext) as BoardContextType;
-  const { mouseState } = useContext(MouseContext) as MouseContextType;
 
   const handleClick = () => {
     toggleCellState(col, row);
   };
 
-  const handleMouseEnter = () => {
-    if (!mouseState.isMouseDown) return;
+  const handleMouseEnter = (event: KonvaEventObject<MouseEvent>) => {
+    if ((event.evt.buttons & 1) == 0) return;
     toggleCellState(col, row);
   };
 
