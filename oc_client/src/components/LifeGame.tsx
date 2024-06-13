@@ -1,23 +1,14 @@
-import { Button } from '@chakra-ui/react';
 import { Board } from './Board';
 import { useContext, useState } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
+import { Flex } from '@chakra-ui/react';
+import { Controller } from './Controller';
 
 export const LifeGame = () => {
-  const { resetCellState, advanceBoard, randomizeBoard } = useContext(
-    BoardContext
-  ) as BoardContextType;
-  const [isAuto, setIsAuto] = useState(false);
+  const { advanceBoard } = useContext(BoardContext) as BoardContextType;
 
-  const handleReset = () => {
-    resetCellState();
-    isAuto && toggleAutoAdvance();
-  };
-
-  const handleAdvance = async () => {
-    await advanceBoard();
-  };
+  const [_isAuto, _setIsAuto] = useState(false);
 
   // ゲームループ
   const gameLoop = (elapsed: number) => {
@@ -26,18 +17,26 @@ export const LifeGame = () => {
   const { start: startAuto, stop: endAuto } = useAnimationFrame(gameLoop, 250);
 
   // 自動進行切り替え
-  const toggleAutoAdvance = () => {
-    isAuto ? endAuto() : startAuto();
-    setIsAuto(!isAuto);
+  const setIsAuto = (auto: boolean) => {
+    if (auto) {
+      // 自動進行ON
+      if (_isAuto) return;
+      startAuto();
+      _setIsAuto(true);
+    } else {
+      // 自動進行OFF
+      if (!_isAuto) return;
+      endAuto();
+      _setIsAuto(false);
+    }
   };
 
   return (
     <>
-      <Board cellSize={15} />
-      <Button onClick={handleReset}>リセット</Button>
-      <Button onClick={handleAdvance}>進める</Button>
-      <Button onClick={toggleAutoAdvance}>自動で進める</Button>
-      <Button onClick={randomizeBoard}>ランダム</Button>
+      <Flex>
+        <Board cellSize={15} />
+        <Controller isAuto={_isAuto} setIsAuto={setIsAuto} />
+      </Flex>
     </>
   );
 };

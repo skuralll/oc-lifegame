@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { LifeGame } from './LifeGame';
-import { BoardProvider } from '../contexts/BoardProvider';
-import { ChakraProvider } from '@chakra-ui/react';
+import { LifeGame } from "./LifeGame";
+import { BoardProvider } from "../contexts/BoardProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const meta: Meta<typeof LifeGame> = {
-  title: 'components/LifeGame',
+  title: "components/LifeGame",
   component: LifeGame,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {},
   argTypes: {},
   decorators: [

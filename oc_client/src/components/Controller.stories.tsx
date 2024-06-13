@@ -6,8 +6,8 @@ const meta: Meta<typeof Controller> = {
   title: "components/Controller",
   component: Controller,
   tags: ["autodocs"],
-  args: {},
-  argTypes: {},
+  args: { isAuto: true, setIsAuto: undefined },
+  argTypes: { isAuto: { control: "boolean" } },
 };
 
 export default meta;
