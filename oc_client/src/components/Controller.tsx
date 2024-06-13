@@ -29,10 +29,16 @@ export const Controller = ({ isAuto, setIsAuto }: ControllerProps) => {
 
   return (
     <Box>
-      <Button onClick={handleReset}>リセット</Button>
-      <Button onClick={handleAdvance}>進める</Button>
-      <Button onClick={() => setIsAuto(!isAuto)}>自動で進める</Button>
-      <Button onClick={handleRandomize}>ランダム</Button>
+      <Button onClick={handleReset} isDisabled={isAuto}>
+        リセット
+      </Button>
+      <Button onClick={handleAdvance} isDisabled={isAuto}>
+        進める
+      </Button>
+      <Button onClick={() => setIsAuto(!isAuto)}>{isAuto ? '止める' : '自動で進める'}</Button>
+      <Button onClick={handleRandomize} isDisabled={isAuto}>
+        ランダム
+      </Button>
     </Box>
   );
 };
