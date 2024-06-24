@@ -1,23 +1,16 @@
-import { Button } from '@chakra-ui/react';
 import { Board } from './Board';
 import { useContext, useState } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
+import { Box, Center, Flex, HStack, Spacer, VStack } from '@chakra-ui/react';
+import { BaseController } from './BaseController';
+import { AutoButton } from './AutoButton';
+import { DrawModeController } from './DrawModeController';
 
 export const LifeGame = () => {
-  const { resetCellState, advanceBoard, randomizeBoard } = useContext(
-    BoardContext
-  ) as BoardContextType;
-  const [isAuto, setIsAuto] = useState(false);
-
-  const handleReset = () => {
-    resetCellState();
-    isAuto && toggleAutoAdvance();
-  };
-
-  const handleAdvance = async () => {
-    await advanceBoard();
-  };
+  const { boardState, advanceBoard } = useContext(BoardContext) as BoardContextType;
+  const [_isAuto, _setIsAuto] = useState(false);
+  const [cellSize, setCellSize] = useState(20);
 
   // ゲームループ
   const gameLoop = (elapsed: number) => {
@@ -26,18 +19,32 @@ export const LifeGame = () => {
   const { start: startAuto, stop: endAuto } = useAnimationFrame(gameLoop, 250);
 
   // 自動進行切り替え
-  const toggleAutoAdvance = () => {
-    isAuto ? endAuto() : startAuto();
-    setIsAuto(!isAuto);
+  const setIsAuto = (auto: boolean) => {
+    if (auto) {
+      // 自動進行ON
+      if (_isAuto) return;
+      startAuto();
+      _setIsAuto(true);
+    } else {
+      // 自動進行OFF
+      if (!_isAuto) return;
+      endAuto();
+      _setIsAuto(false);
+    }
   };
 
   return (
-    <>
-      <Board cellSize={15} />
-      <Button onClick={handleReset}>リセット</Button>
-      <Button onClick={handleAdvance}>進める</Button>
-      <Button onClick={toggleAutoAdvance}>自動で進める</Button>
-      <Button onClick={randomizeBoard}>ランダム</Button>
-    </>
+    <Center>
+      <VStack>
+        <Flex w="100%">
+          <AutoButton isAuto={_isAuto} setIsAuto={setIsAuto} />
+          <Spacer />
+          <BaseController isAuto={_isAuto} setIsAuto={setIsAuto} />
+          <Spacer />
+          <DrawModeController />
+        </Flex>
+        <Board cellSize={cellSize} />
+      </VStack>
+    </Center>
   );
 };

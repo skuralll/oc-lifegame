@@ -1,13 +1,13 @@
 import { BoardProvider } from '../contexts/BoardProvider';
-import { MouseStateProvider } from '../contexts/MouseStateProvider';
 import { LifeGame } from './LifeGame';
+import { GameProvider } from '../contexts/GameProvider';
 
 export const LifeGameWrapper = () => {
   return (
-    <BoardProvider>
-      <MouseStateProvider>
+    <GameProvider>
+      <BoardProvider>
         <LifeGame />
-      </MouseStateProvider>
-    </BoardProvider>
+      </BoardProvider>
+    </GameProvider>
   );
 };

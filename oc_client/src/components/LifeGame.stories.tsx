@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { LifeGame } from "./LifeGame";
 import { BoardProvider } from "../contexts/BoardProvider";
-import { MouseStateProvider } from "../contexts/MouseStateProvider";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const meta: Meta<typeof LifeGame> = {
@@ -15,9 +14,7 @@ const meta: Meta<typeof LifeGame> = {
     (Story) => (
       <ChakraProvider>
         <BoardProvider>
-          <MouseStateProvider>
-            <Story />
-          </MouseStateProvider>
+          <Story />
         </BoardProvider>
       </ChakraProvider>
     ),
