@@ -1,7 +1,6 @@
 // Chakra UI を使ったNavBar
-import { Box, Flex, Icon, Spacer, Text, Link } from '@chakra-ui/react';
-import React from 'react';
-import { GithubFilled } from '@ant-design/icons';
+import { Box, Flex, Spacer, Text, Link } from '@chakra-ui/react';
+import { FaGithub } from 'react-icons/fa';
 
 type NavBarProps = {};
 
@@ -16,7 +15,7 @@ export const NavBar = ({}: NavBarProps) => {
       <Spacer />
       <Box ml={4}>
         <Link href="https://github.com/skuralll/oc-lifegame">
-          <GithubFilled style={{ fontSize: '24px', color: '#fff' }} />
+          <FaGithub color="#fff" size="26px" />
         </Link>
       </Box>
     </Flex>
