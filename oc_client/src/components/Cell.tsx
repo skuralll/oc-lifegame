@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Rect } from 'react-konva';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { KonvaEventObject } from 'konva/lib/Node';
+import { GameContext, GameContextType } from '../contexts/GameProvider';
 
 type CellProps = {
   col: number;
@@ -13,15 +14,18 @@ type CellProps = {
 };
 
 export const Cell = ({ col, row, x, y, cellSize, alive }: CellProps) => {
-  const { toggleCellState } = useContext(BoardContext) as BoardContextType;
+  const { setCellState } = useContext(BoardContext) as BoardContextType;
+  const { isDrawMode } = useContext(GameContext) as GameContextType;
+
+  console.log('this is a test');
 
   const handleClick = () => {
-    toggleCellState(col, row);
+    setCellState(col, row, isDrawMode ? 1 : 0);
   };
 
   const handleMouseEnter = (event: KonvaEventObject<MouseEvent>) => {
     if ((event.evt.buttons & 1) == 0) return;
-    toggleCellState(col, row);
+    setCellState(col, row, isDrawMode ? 1 : 0);
   };
 
   return (

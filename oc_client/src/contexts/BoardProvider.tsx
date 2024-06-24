@@ -11,6 +11,7 @@ export type BoardContextType = {
   boardState: BoardState;
   setBoardState: (boardState: BoardState) => void;
   toggleCellState: (x: number, y: number) => void;
+  setCellState: (x: number, y: number, state: number) => void;
   resetCellState: () => void;
   advanceBoard: () => Promise<void>;
   randomizeBoard: () => void;
@@ -28,6 +29,13 @@ export const BoardProvider = ({ children }: BoardProviderProps) => {
   const toggleCellState = (x: number, y: number) => {
     const newState = { ...boardState };
     newState.board[y][x] = newState.board[y][x] === 0 ? 1 : 0;
+    setBoardState(newState);
+  };
+
+  const setCellState = (x: number, y: number, state: number) => {
+    if (boardState.board[y][x] === state) return;
+    const newState = { ...boardState };
+    newState.board[y][x] = state;
     setBoardState(newState);
   };
 
@@ -53,6 +61,7 @@ export const BoardProvider = ({ children }: BoardProviderProps) => {
         boardState,
         setBoardState,
         toggleCellState,
+        setCellState,
         resetCellState,
         advanceBoard,
         randomizeBoard,
