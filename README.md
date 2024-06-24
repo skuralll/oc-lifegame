@@ -3,4 +3,4 @@
 ## サーバ
 OCaml (Dream)
 ## クライアント
-未定
+TypeScript (React)
