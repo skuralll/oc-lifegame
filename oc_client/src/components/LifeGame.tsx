@@ -2,8 +2,9 @@ import { Board } from './Board';
 import { useContext, useState } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
-import { Center, Flex } from '@chakra-ui/react';
+import { Center, Flex, Spacer, VStack } from '@chakra-ui/react';
 import { Controller } from './Controller';
+import { BaseController } from './BaseController';
 
 export const LifeGame = () => {
   const { advanceBoard } = useContext(BoardContext) as BoardContextType;
@@ -33,10 +34,12 @@ export const LifeGame = () => {
 
   return (
     <>
-      <Center>
-        <Board cellSize={15} />
+      <VStack>
+        <BaseController isAuto={_isAuto} setIsAuto={setIsAuto} />
+        <Spacer />
+        <Board cellSize={20} />
         {/* <Controller isAuto={_isAuto} setIsAuto={setIsAuto} /> */}
-      </Center>
+      </VStack>
     </>
   );
 };
