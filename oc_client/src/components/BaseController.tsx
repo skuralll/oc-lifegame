@@ -28,14 +28,14 @@ export const BaseController = ({ isAuto, setIsAuto }: BaseControllerProps) => {
   };
 
   return (
-    <HStack spacing={12}>
-      <Button onClick={handleAdvance} isDisabled={isAuto} flexGrow={1} colorScheme="teal">
+    <HStack spacing={10}>
+      <Button onClick={handleAdvance} isDisabled={isAuto} flexGrow={1} colorScheme="teal" w={24}>
         進める
       </Button>
-      <Button onClick={handleReset} isDisabled={isAuto} flexGrow={1} colorScheme="teal">
+      <Button onClick={handleReset} isDisabled={isAuto} flexGrow={1} colorScheme="teal" w={24}>
         リセット
       </Button>
-      <Button onClick={handleRandomize} isDisabled={isAuto} flexGrow={1} colorScheme="teal">
+      <Button onClick={handleRandomize} isDisabled={isAuto} flexGrow={1} colorScheme="teal" w={24}>
         ランダム
       </Button>
     </HStack>

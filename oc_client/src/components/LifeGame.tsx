@@ -2,14 +2,14 @@ import { Board } from './Board';
 import { useContext, useState } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
-import { Center, Flex, Spacer, VStack } from '@chakra-ui/react';
-import { Controller } from './Controller';
+import { Box, Center, Flex, HStack, Spacer, VStack } from '@chakra-ui/react';
 import { BaseController } from './BaseController';
+import { AutoButton } from './AutoButton';
 
 export const LifeGame = () => {
-  const { advanceBoard } = useContext(BoardContext) as BoardContextType;
-
+  const { boardState, advanceBoard } = useContext(BoardContext) as BoardContextType;
   const [_isAuto, _setIsAuto] = useState(false);
+  const [cellSize, setCellSize] = useState(20);
 
   // ゲームループ
   const gameLoop = (elapsed: number) => {
@@ -33,13 +33,16 @@ export const LifeGame = () => {
   };
 
   return (
-    <>
+    <Center>
       <VStack>
-        <BaseController isAuto={_isAuto} setIsAuto={setIsAuto} />
-        <Spacer />
-        <Board cellSize={20} />
-        {/* <Controller isAuto={_isAuto} setIsAuto={setIsAuto} /> */}
+        <Flex w="100%">
+          <AutoButton isAuto={_isAuto} setIsAuto={setIsAuto} />
+          <Spacer />
+          <BaseController isAuto={_isAuto} setIsAuto={setIsAuto} />
+          <Spacer />
+        </Flex>
+        <Board cellSize={cellSize} />
       </VStack>
-    </>
+    </Center>
   );
 };
