@@ -5,6 +5,7 @@ import { useAnimationFrame } from '../hooks/AnimationFrame';
 import { Box, Center, Flex, HStack, Spacer, VStack } from '@chakra-ui/react';
 import { BaseController } from './BaseController';
 import { AutoButton } from './AutoButton';
+import { DrawModeController } from './DrawModeController';
 
 export const LifeGame = () => {
   const { boardState, advanceBoard } = useContext(BoardContext) as BoardContextType;
@@ -40,6 +41,7 @@ export const LifeGame = () => {
           <Spacer />
           <BaseController isAuto={_isAuto} setIsAuto={setIsAuto} />
           <Spacer />
+          <DrawModeController />
         </Flex>
         <Board cellSize={cellSize} />
       </VStack>

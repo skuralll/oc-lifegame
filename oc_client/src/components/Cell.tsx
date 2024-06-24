@@ -17,8 +17,6 @@ export const Cell = ({ col, row, x, y, cellSize, alive }: CellProps) => {
   const { setCellState } = useContext(BoardContext) as BoardContextType;
   const { isDrawMode } = useContext(GameContext) as GameContextType;
 
-  console.log('this is a test');
-
   const handleClick = () => {
     setCellState(col, row, isDrawMode ? 1 : 0);
   };
