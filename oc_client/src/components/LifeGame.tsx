@@ -2,7 +2,7 @@ import { Board } from './Board';
 import { useContext, useState } from 'react';
 import { BoardContext, BoardContextType } from '../contexts/BoardProvider';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
-import { Flex } from '@chakra-ui/react';
+import { Center, Flex } from '@chakra-ui/react';
 import { Controller } from './Controller';
 
 export const LifeGame = () => {
@@ -33,10 +33,10 @@ export const LifeGame = () => {
 
   return (
     <>
-      <Flex>
+      <Center>
         <Board cellSize={15} />
-        <Controller isAuto={_isAuto} setIsAuto={setIsAuto} />
-      </Flex>
+        {/* <Controller isAuto={_isAuto} setIsAuto={setIsAuto} /> */}
+      </Center>
     </>
   );
 };
