@@ -20,7 +20,7 @@ TypeScript (React)
 1. このリポジトリをクローンする
 
 ```sh
-git@github.com:skuralll/oc-lifegame.git
+git clone git@github.com:skuralll/oc-lifegame.git
 ```
 
 2. サーバサイド
