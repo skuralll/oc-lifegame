@@ -1,12 +1,12 @@
 // Chakra UI を使ったNavBar
 import {
-  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Center,
 } from '@chakra-ui/react';
 import { QRCodeCanvas } from 'qrcode.react';
 
@@ -18,28 +18,22 @@ type QRModalProps = {
 
 export const QRModal = ({ isOpen, onOpen, onClose }: QRModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} motionPreset="scale" size="lg" isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={'rgb(40,48,63)'}>
         <ModalHeader>ソースコード</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <QRCodeCanvas
-            value={'https://github.com/skuralll/oc-lifegame'}
-            size={384}
-            bgColor={'#FFFFFF'}
-            fgColor={'#000000'}
-            level={'L'}
-            includeMargin={true}
-            imageSettings={{
-              src: '/favicon.ico',
-              x: undefined,
-              y: undefined,
-              height: 24,
-              width: 24,
-              excavate: true,
-            }}
-          />
+          <Center pt={4} pb={8}>
+            <QRCodeCanvas
+              value={'https://github.com/skuralll/oc-lifegame'}
+              size={384}
+              bgColor={'rgb(40,48,63)'}
+              fgColor={'#FFFFFF'}
+              level={'L'}
+              includeMargin={false}
+            />
+          </Center>
         </ModalBody>
       </ModalContent>
     </Modal>
